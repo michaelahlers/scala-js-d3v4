@@ -114,9 +114,6 @@ object d3hierarchy extends js.Object {
     def padding(): js.Function1[Hierarchy[Datum], Double] = js.native
 
     /** @see [[https://github.com/d3/d3-hierarchy#pack_padding]] */
-    def padding(padding: js.Function1[Hierarchy[Datum], Double]): this.type = js.native
-
-    /** @see [[https://github.com/d3/d3-hierarchy#pack_padding]] */
     def padding(padding: Double): this.type = js.native
 
   }
