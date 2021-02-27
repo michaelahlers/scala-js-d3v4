@@ -1,7 +1,7 @@
 package d3v4
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSExportAll, JSImport}
+import scala.scalajs.js.annotation.JSImport
 
 /**
  * @see [[https://github.com/d3/d3-hierarchy]]
@@ -49,8 +49,8 @@ object d3hierarchy extends js.Object {
     /** @see [[https://github.com/d3/d3-hierarchy#node_links]] */
     def links(): js.Array[this.type] = js.native
 
-    ///** @see [[https://github.com/d3/d3-hierarchy#node_sum]] */
-    //def sum(value: ???): ??? = js.native
+    /** @see [[https://github.com/d3/d3-hierarchy#node_sum]] */
+    def sum(value: js.Function1[Datum, js.UndefOr[Double]]): this.type = js.native
 
     /** @see [[https://github.com/d3/d3-hierarchy#node_count]] */
     def count(): Int = js.native
