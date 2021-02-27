@@ -40,6 +40,11 @@ object d3zoom extends js.Object {
   @js.native
   trait ZoomBehavior[Datum] extends js.Function1[Selection[Datum], Unit] {
     def on(typenames: String, listener: ListenerFunction0): ZoomBehavior[Datum] = js.native
+
+    /** @see [[https://github.com/d3/d3-zoom#zoom_extent]] */
+    def extent(extent: js.Array[js.Array[Double]]): ZoomBehavior[Datum] = js.native
+    def extent(): js.Array[js.Array[Double]] = js.native
+
     def scaleExtent(extent: js.Array[Double]): ZoomBehavior[Datum] = js.native
     def scaleExtent(): js.Array[Double] = js.native
     def transform(selection: Selection[Datum], transform: Transform): Transform = js.native
