@@ -21,7 +21,29 @@ object d3hierarchy extends js.Object {
   /** @see [[https://github.com/d3/d3-hierarchy#pack]] */
   def pack[Datum](): Pack[Datum] = js.native
 
-  def packSiblings[Datum](circles: js.Iterable[Datum]): js.Array[Datum] = js.native
+  /**
+   * @see [[https://github.com/d3/d3-hierarchy#packSiblings]]
+   * @see [[Circle]]
+   */
+  def packSiblings[Datum](circles: js.Iterable[Circle[Datum]]): js.Array[Circle[Datum] with Packed] = js.native
+
+  /**
+   * Given [[Circle circles]] need have already been [[Packed]].
+   * @see [[https://github.com/d3/d3-hierarchy#packEnclose]]
+   * @see [[Enclosure]]
+   */
+  def packEnclose[Datum](circles: js.Iterable[Circle[Datum] with Packed]): Enclosure = js.native
+
+  /**
+   * @see [[packEnclose]]
+   * @see [[Enclosure]]
+   */
+  @js.native
+  trait Enclosure extends js.Object {
+    def x: js.UndefOr[Double] = js.native
+    def y: js.UndefOr[Double] = js.native
+    def r: js.UndefOr[Double] = js.native
+  }
 
   /** @see [[hierarchy]] */
   @js.native
@@ -83,8 +105,9 @@ object d3hierarchy extends js.Object {
 
   }
 
+  /** Decorator type indicating a layout operation has been applied. */
   @js.native
-  trait Packed extends js.Object { self: Hierarchy[_] =>
+  trait Packed extends js.Object {
     def x: js.UndefOr[Double] = js.native
     def y: js.UndefOr[Double] = js.native
     def r: js.UndefOr[Double] = js.native
@@ -122,6 +145,10 @@ object d3hierarchy extends js.Object {
 
 }
 
+/**
+ * @see [[d3hierarchy.packSiblings]]
+ * @see [[d3hierarchy.packEnclose]]
+ */
 @JSExportAll
 trait Circle[Datum]  {
 
@@ -131,17 +158,10 @@ trait Circle[Datum]  {
   def r: js.UndefOr[Double]
   def r_=(y: js.UndefOr[Double]): Unit
 
-  def x: js.UndefOr[Double]
-  def x_=(x: js.UndefOr[Double]): Unit
-
-  def y: js.UndefOr[Double]
-  def y_=(y: js.UndefOr[Double]): Unit
-
 }
 
+@JSExportAll
 case class CircleImpl[Datum](
   override var data: js.UndefOr[Datum] = js.undefined,
-  override var r: js.UndefOr[Double] = js.undefined,
-  override var x: js.UndefOr[Double] = js.undefined,
-  override var y: js.UndefOr[Double] = js.undefined)
+  override var r: js.UndefOr[Double] = js.undefined)
   extends Circle[Datum]
