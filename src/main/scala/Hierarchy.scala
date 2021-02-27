@@ -1,7 +1,7 @@
 package d3v4
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSImport
+import scala.scalajs.js.annotation.{JSExportAll, JSImport}
 
 /**
  * @see [[https://github.com/d3/d3-hierarchy]]
@@ -20,6 +20,8 @@ object d3hierarchy extends js.Object {
 
   /** @see [[https://github.com/d3/d3-hierarchy#pack]] */
   def pack[Datum](): Pack[Datum] = js.native
+
+  def packSiblings[Datum](circles: js.Iterable[Datum]): js.Array[Datum] = js.native
 
   /** @see [[hierarchy]] */
   @js.native
@@ -120,3 +122,26 @@ object d3hierarchy extends js.Object {
 
 }
 
+@JSExportAll
+trait Circle[Datum]  {
+
+  def data: js.UndefOr[Datum]
+  def data_=(data: js.UndefOr[Datum]): Unit
+
+  def r: js.UndefOr[Double]
+  def r_=(y: js.UndefOr[Double]): Unit
+
+  def x: js.UndefOr[Double]
+  def x_=(x: js.UndefOr[Double]): Unit
+
+  def y: js.UndefOr[Double]
+  def y_=(y: js.UndefOr[Double]): Unit
+
+}
+
+case class CircleImpl[Datum](
+  override var data: js.UndefOr[Datum] = js.undefined,
+  override var r: js.UndefOr[Double] = js.undefined,
+  override var x: js.UndefOr[Double] = js.undefined,
+  override var y: js.UndefOr[Double] = js.undefined)
+  extends Circle[Datum]
